@@ -15,3 +15,26 @@ def pregunta_05():
     [('A', 9, 2), ('B', 9, 1), ('C', 9, 0), ('D', 8, 3), ('E', 9, 1)]
 
     """
+
+    data = {}
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as f:
+        for line in f:
+            parts = line.strip().split("\t")
+
+            letter = parts[0]
+            value = int(parts[1])
+
+            if letter not in data:
+                data[letter] = {"max": value, "min": value}
+
+            else:
+                data[letter]["max"] = max(data[letter]["max"], value)
+                data[letter]["min"] = min(data[letter]["min"], value)
+
+    result = []
+
+    for letter in sorted(data.keys()):
+        result.append((letter, data[letter]["max"], data[letter]["min"]))
+
+    return result

@@ -15,3 +15,21 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+
+    result = {}
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as data:
+        for line in data:
+            parts = line.strip().split("\t")
+            letter = parts[0]
+            pairs = parts[4].split(",")
+
+            total = 0
+            for p in pairs:
+                total += int(p.split(":")[1])
+
+            if letter not in result:
+                result[letter] = 0
+            result[letter] += total
+
+    return result

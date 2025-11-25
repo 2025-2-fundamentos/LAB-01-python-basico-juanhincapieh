@@ -16,3 +16,19 @@ def pregunta_11():
 
 
     """
+
+    sums = {}
+
+    with open("files/input/data.csv", "r", encoding="utf-8") as data:
+        for line in data:
+            parts = line.strip().split("\t")
+            value = int(parts[1])
+            letters = parts[3].split(",")
+
+            for letter in letters:
+                if letter not in sums:
+                    sums[letter] = 0
+                sums[letter] += value
+
+    result = dict(sorted(sums.items()))
+    return result
